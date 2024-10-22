@@ -1,0 +1,7 @@
+{"version": 2, "width": 148, "height": 10, "timestamp": 1729595231, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}}
+[0.387178, "o", "\u001b[?2004happ (main) $ "]
+[2.269572, "o", "\u001b[7m./build/install/app/bin/app -f plain ./src/test/resources/file1.json ./src/test/resources/file2.json\u001b[27m\r\n\r"]
+[3.983422, "o", "\u001b[A\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C./build/install/app/bin/app -f plain ./src/test/resources/file1.json ./src/test/resources/file2.json\r\n\r\u001b[A\r\n\u001b[?2004l\r"]
+[4.379538, "o", "Property 'chars2' was updated. From [complex value] to false\r\nProperty 'checked' was updated. From false to true\r\nProperty 'default' was updated. From null to [complex value]\r\nProperty 'id' was updated. From 45 to null\r\nProperty 'key1' was removed\r\nProperty 'key2' was added with value: 'value2'\r\nProperty 'numbers2' was updated. From [complex value] to [complex value]\r\nProperty 'numbers3' was removed\r\nProperty 'numbers4' was added with value: [complex value]\r\nProperty 'obj1' was added with value: [complex value]\r\nProperty 'setting1' was updated. From 'Some value' to 'Another value'\r\nProperty 'setting2' was updated. From 200 to 300\r\nProperty 'setting3' was updated. From true to 'none'\r\n"]
+[4.395481, "o", "\u001b[?2004happ (main) $ "]
+[7.296477, "o", "\u001b[?2004l\r\r\nexit\r\n"]

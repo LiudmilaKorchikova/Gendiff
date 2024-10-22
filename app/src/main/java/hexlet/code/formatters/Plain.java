@@ -27,7 +27,8 @@ public class Plain {
                         break;
                     case "updated":
                         result.append("Property '").append(property).append("' was updated. From ")
-                                .append(formatValue(oldValue)).append(" to ").append(formatValue(newValue)).append("\n");
+                                .append(formatValue(oldValue)).append(" to ")
+                                .append(formatValue(newValue)).append("\n");
                         break;
                     default:
                         break;

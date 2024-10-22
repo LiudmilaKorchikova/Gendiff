@@ -1,8 +1,11 @@
 package hexlet.code;
 
-import hexlet.code.formatters.Stylish;
-import hexlet.code.formatters.Plain;
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,6 +18,9 @@ public class Differ {
         Map<String, Object> differences = calculateDifferences(map1, map2);
 
         return Formatter.format(differences, format);
+    }
+    public static String generate(String filepath1, String filepath2) throws Exception {
+        return generate(filepath1, filepath2, "Stylish");
     }
 
     private static Map<String, Object> calculateDifferences(Map<String, Object> map1, Map<String, Object> map2) {
