@@ -22,13 +22,13 @@ jobs:
         java-version: '21'
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./app/gradlew build
 
     - name: Run Checkstyle
-      run: ./gradlew checkstyleMain checkstyleTest
+      run: ./app/gradlew checkstyleMain checkstyleTest
 
     - name: Run tests
-      run: ./gradlew test
+      run: ./app/gradlew test
 
     - name: Test Coverage Report
       run: |
