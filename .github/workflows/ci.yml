@@ -22,16 +22,23 @@ jobs:
         java-version: '21'
 
     - name: Build with Gradle
-      run: ./app/gradlew build
+        run: |
+          cd app
+          ./gradlew build
 
     - name: Run Checkstyle
-      run: ./app/gradlew checkstyleMain checkstyleTest
+      run: |
+        cd app
+        ./gradlew checkstyleMain checkstyleTest
 
     - name: Run tests
-      run: ./app/gradlew test
-
-    - name: Test Coverage Report
       run: |
+        cd app
+        ./gradlew test
+
+     - name: Test Coverage Report
+       run: |
+        cd app
         ./gradlew jacocoTestReport
         ./cc-test-reporter after-build --exit-code $?
       env:
