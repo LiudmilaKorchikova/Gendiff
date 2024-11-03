@@ -22,7 +22,7 @@ jobs:
         java-version: '21'
 
     - name: Build with Gradle
-        run: |
+      run: |
           cd app
           ./gradlew build
 
