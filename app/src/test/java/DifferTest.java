@@ -1,136 +1,102 @@
-
 import org.junit.jupiter.api.Test;
 import hexlet.code.Differ;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DifferTest {
 
     @Test
-    public void testGenerateNestedStructuresSameValues() throws Exception {
-        Path tempFile1 = Files.createTempFile("temp1", ".json");
-        Path tempFile2 = Files.createTempFile("temp2", ".json");
+    public void testGenerateStylishFormat() throws Exception {
+        String file1Path = "src/test/resources/file1.json";
+        String file2Path = "src/test/resources/file2.json";
+        String expectedFilePath = "src/test/resources/stylishExpected.txt";
 
-        String json1 = "{ \"key1\": { \"nestedKey1\": \"value1\" }, \"key2\": [1, 2, 3] }";
-        String json2 = "{ \"key1\": { \"nestedKey1\": \"value1\" }, \"key2\": [1, 2, 3] }";
+        String result = Differ.generate(file1Path, file2Path, "stylish");
 
-        Files.write(tempFile1, json1.getBytes(), StandardOpenOption.WRITE);
-        Files.write(tempFile2, json2.getBytes(), StandardOpenOption.WRITE);
+        String expected = Files.readString(Path.of(expectedFilePath)).trim();
 
-        String result = Differ.generate(tempFile1.toString(), tempFile2.toString());
+        String normalizedExpected = expected.replaceAll("\\s+", " ");
+        String normalizedResult = result.replaceAll("\\s+", " ");
 
-        String expected = "{\n"
-                + "    key1: {nestedKey1=value1}\n"
-                + "    key2: [1, 2, 3]\n"
-                + "}";
-
-        assertEquals(expected, result);
-
-        Files.delete(tempFile1);
-        Files.delete(tempFile2);
+        assertEquals(normalizedExpected, normalizedResult);
     }
 
     @Test
-    public void testGenerateNestedStructuresDifferentValues() throws Exception {
-        Path tempFile1 = Files.createTempFile("temp1", ".json");
-        Path tempFile2 = Files.createTempFile("temp2", ".json");
+    public void testGeneratePlainFormat() throws Exception {
+        String file1Path = "src/test/resources/file1.json";
+        String file2Path = "src/test/resources/file2.json";
+        String expectedFilePath = "src/test/resources/plainExpected.txt";
 
-        String json1 = "{ \"key1\": { \"nestedKey1\": \"value1\" }, \"key2\": [1, 2, 3] }";
-        String json2 = "{ \"key1\": { \"nestedKey1\": \"value2\" }, \"key2\": [1, 2, 3, 4] }";
+        String result = Differ.generate(file1Path, file2Path, "plain");
 
-        Files.write(tempFile1, json1.getBytes(), StandardOpenOption.WRITE);
-        Files.write(tempFile2, json2.getBytes(), StandardOpenOption.WRITE);
+        String expected = Files.readString(Path.of(expectedFilePath)).trim();
 
-        String result = Differ.generate(tempFile1.toString(), tempFile2.toString());
+        String normalizedExpected = expected.replaceAll("\\s+", " ");
+        String normalizedResult = result.replaceAll("\\s+", " ");
 
-        String expected = "{\n"
-                + "    key1: {nestedKey1=value1}\n"
-                + "  - key2: [1, 2, 3]\n"
-                + "  + key2: [1, 2, 3, 4]\n"
-                + "}";
+        assertEquals(normalizedExpected, normalizedResult);
+    }
 
-        assertEquals(expected, result);
+    public void testGenerateJsonFormat() throws Exception {
+        String file1Path = "src/test/resources/file1.json";
+        String file2Path = "src/test/resources/file2.json";
+        String expectedFilePath = "src/test/resources/jsonExpected.json";
+        ObjectMapper mapper = new ObjectMapper();
 
-        Files.delete(tempFile1);
-        Files.delete(tempFile2);
+        JsonNode result;
+        result = mapper.readTree(Differ.generate(file1Path, file2Path, "json").trim());
+
+        JsonNode expected;
+        expected = mapper.readTree(Files.readString(Path.of((expectedFilePath))).trim());
+        assertEquals(result, expected);
+    }
+
+    public void testYamlGenerateStylishFormat() throws Exception {
+        String file1Path = "src/test/resources/file1.yaml";
+        String file2Path = "src/test/resources/file2.yaml";
+        String expectedFilePath = "src/test/resources/stylishExpected.txt";
+
+        String result = Differ.generate(file1Path, file2Path, "stylish");
+
+        String expected = Files.readString(Path.of(expectedFilePath)).trim();
+
+        String normalizedExpected = expected.replaceAll("\\s+", " ");
+        String normalizedResult = result.replaceAll("\\s+", " ");
+
+        assertEquals(normalizedExpected, normalizedResult);
     }
 
     @Test
-    public void testGenerateFile1HasExtraKeyNested() throws Exception {
-        Path tempFile1 = Files.createTempFile("temp1", ".json");
-        Path tempFile2 = Files.createTempFile("temp2", ".json");
+    public void testYamlGeneratePlainFormat() throws Exception {
+        String file1Path = "src/test/resources/file1.yaml";
+        String file2Path = "src/test/resources/file2.yaml";
+        String expectedFilePath = "src/test/resources/plainExpected.txt";
 
-        String json1 = "{ \"key1\": { \"nestedKey1\": \"value1\" }, \"key2\": [1, 2] }";
-        String json2 = "{ \"key1\": { \"nestedKey1\": \"value1\" }, \"key2\": [1, 2, 3] }";
+        String result = Differ.generate(file1Path, file2Path, "plain");
 
-        Files.write(tempFile1, json1.getBytes(), StandardOpenOption.WRITE);
-        Files.write(tempFile2, json2.getBytes(), StandardOpenOption.WRITE);
+        String expected = Files.readString(Path.of(expectedFilePath)).trim();
 
-        String result = Differ.generate(tempFile1.toString(), tempFile2.toString());
+        String normalizedExpected = expected.replaceAll("\\s+", " ");
+        String normalizedResult = result.replaceAll("\\s+", " ");
 
-        String expected = "{\n"
-                + "    key1: {nestedKey1=value1}\n"
-                + "  - key2: [1, 2]\n"
-                + "  + key2: [1, 2, 3]\n"
-                + "}";
-
-        assertEquals(expected, result);
-
-        Files.delete(tempFile1);
-        Files.delete(tempFile2);
+        assertEquals(normalizedExpected, normalizedResult);
     }
 
-    @Test
-    public void testGenerateFile2HasExtraKeyNested() throws Exception {
-        Path tempFile1 = Files.createTempFile("temp1", ".json");
-        Path tempFile2 = Files.createTempFile("temp2", ".json");
+    public void testYamlGenerateJsonFormat() throws Exception {
+        String file1Path = "src/test/resources/file1.yaml";
+        String file2Path = "src/test/resources/file2.yaml";
+        String expectedFilePath = "src/test/resources/jsonExpected.json";
+        ObjectMapper mapper = new ObjectMapper();
 
-        String json1 = "{ \"key1\": { \"nestedKey1\": \"value1\" }, \"key2\": [1, 2] }";
-        String json2 = "{ \"key1\": { \"nestedKey1\": \"value1\" }, \"key2\": [1, 2], \"key3\": \"newKey\" }";
+        JsonNode result;
+        result = mapper.readTree(Differ.generate(file1Path, file2Path, "json").trim());
 
-        Files.write(tempFile1, json1.getBytes(), StandardOpenOption.WRITE);
-        Files.write(tempFile2, json2.getBytes(), StandardOpenOption.WRITE);
-
-        String result = Differ.generate(tempFile1.toString(), tempFile2.toString());
-
-        String expected = "{\n"
-                + "    key1: {nestedKey1=value1}\n"
-                + "  - key2: [1, 2]\n"
-                + "  + key2: [1, 2]\n"
-                + "  + key3: newKey\n"
-                + "}";
-
-        assertEquals(expected, result);
-
-        Files.delete(tempFile1);
-        Files.delete(tempFile2);
-    }
-
-    @Test
-    public void testGenerateNestedArray() throws Exception {
-        Path tempFile1 = Files.createTempFile("temp1", ".json");
-        Path tempFile2 = Files.createTempFile("temp2", ".json");
-
-        String json1 = "{ \"key1\": [1, 2, 3], \"key2\": {\"nestedKey\": \"value\"} }";
-        String json2 = "{ \"key1\": [1, 2, 4], \"key2\": {\"nestedKey\": \"value\"} }";
-
-        Files.write(tempFile1, json1.getBytes(), StandardOpenOption.WRITE);
-        Files.write(tempFile2, json2.getBytes(), StandardOpenOption.WRITE);
-
-        String result = Differ.generate(tempFile1.toString(), tempFile2.toString());
-
-        String expected = "{\n"
-                + "  - key1: [1, 2, 3]\n"
-                + "  + key1: [1, 2, 4]\n"
-                + "    key2: {nestedKey=value}\n"
-                + "}";
-
-        assertEquals(expected, result);
-
-        Files.delete(tempFile1);
-        Files.delete(tempFile2);
+        JsonNode expected;
+        expected = mapper.readTree(Files.readString(Path.of((expectedFilePath))).trim());
+        assertEquals(result, expected);
     }
 }
