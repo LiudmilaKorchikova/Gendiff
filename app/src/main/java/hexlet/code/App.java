@@ -12,7 +12,7 @@ import picocli.CommandLine.Parameters;
         mixinStandardHelpOptions = true,
         version = "gendiff 1.0",
         usageHelpAutoWidth = true)
-public class App implements Runnable {
+public final class App implements Runnable {
 
     @Parameters(index = "0", paramLabel = "FILEPATH1", description = "Path to the first file", arity = "1..1")
     private String filepath1;
