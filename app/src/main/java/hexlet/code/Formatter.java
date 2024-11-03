@@ -14,7 +14,7 @@ public class Formatter {
             case "plain" -> Plain.format(differences);
             case "stylish" -> Stylish.format(differences);
             case "json" -> Json.format(differences);
-            default -> throw new IllegalArgumentException("Unknown format: " + format);
+            default -> Stylish.format(differences);
         };
     }
 }
