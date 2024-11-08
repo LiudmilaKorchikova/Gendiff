@@ -57,7 +57,7 @@ public class Stylish {
     private static String formatMap(Map<String, Object> map) {
         StringBuilder result = new StringBuilder("{");
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            result.append(entry.getKey()).append(": ").append(formatValue(entry.getValue())).append(", ");
+            result.append(entry.getKey()).append("=").append(formatValue(entry.getValue())).append(", ");
         }
         if (map.size() > 0) {
             result.setLength(result.length() - 2);
