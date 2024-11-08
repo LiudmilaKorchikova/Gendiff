@@ -1,38 +1,34 @@
 package hexlet.code.formatters;
 
+import java.util.List;
 import java.util.Map;
 
 public class Plain {
 
-    public static String format(Map<String, Object> differences) {
+    public static String format(List<Map<String, Object>> differences) {
         StringBuilder result = new StringBuilder();
 
-        for (Map.Entry<String, Object> entry : differences.entrySet()) {
-            String property = entry.getKey();
-            Object change = entry.getValue();
+        for (Map<String, Object> change : differences) {
+            String property = (String) change.get("key");
+            String status = (String) change.get("status");
+            Object oldValue = change.get("oldValue");
+            Object newValue = change.get("newValue");
 
-            if (change instanceof Map) {
-                Map<String, String> diffDetails = (Map<String, String>) change;
-                String status = diffDetails.get("status");
-                Object oldValue = diffDetails.get("oldValue");
-                Object newValue = diffDetails.get("newValue");
-
-                switch (status) {
-                    case "added":
-                        result.append("Property '").append(property).append("' was added with value: ")
-                                .append(formatValue(newValue)).append("\n");
-                        break;
-                    case "removed":
-                        result.append("Property '").append(property).append("' was removed").append("\n");
-                        break;
-                    case "updated":
-                        result.append("Property '").append(property).append("' was updated. From ")
-                                .append(formatValue(oldValue)).append(" to ")
-                                .append(formatValue(newValue)).append("\n");
-                        break;
-                    default:
-                        break;
-                }
+            switch (status) {
+                case "added":
+                    result.append("Property '").append(property).append("' was added with value: ")
+                            .append(formatValue(newValue)).append("\n");
+                    break;
+                case "removed":
+                    result.append("Property '").append(property).append("' was removed").append("\n");
+                    break;
+                case "updated":
+                    result.append("Property '").append(property).append("' was updated. From ")
+                            .append(formatValue(oldValue)).append(" to ")
+                            .append(formatValue(newValue)).append("\n");
+                    break;
+                default:
+                    break;
             }
         }
 
