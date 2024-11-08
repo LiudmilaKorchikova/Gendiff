@@ -17,21 +17,21 @@ public class Stylish {
 
             switch (status) {
                 case "unchanged":
-                    result.append("      ").append(key).append(": ")
+                    result.append("    ").append(key).append(": ")
                             .append(formatValue(change.get("value"))).append("\n");
                     break;
                 case "updated":
-                    result.append("    - ").append(key).append(": ")
+                    result.append("  - ").append(key).append(": ")
                             .append(formatValue(oldValue)).append("\n");
-                    result.append("    + ").append(key).append(": ")
+                    result.append("  + ").append(key).append(": ")
                             .append(formatValue(newValue)).append("\n");
                     break;
                 case "removed":
-                    result.append("    - ").append(key).append(": ")
+                    result.append("  - ").append(key).append(": ")
                             .append(formatValue(oldValue)).append("\n");
                     break;
                 case "added":
-                    result.append("    + ").append(key).append(": ")
+                    result.append("  + ").append(key).append(": ")
                             .append(formatValue(newValue)).append("\n");
                     break;
                 default:
