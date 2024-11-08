@@ -47,7 +47,7 @@ public class Stylish {
         if (value instanceof Map) {
             return formatMap((Map<String, Object>) value);
         } else if (value instanceof String) {
-            return "'" + value + "'";
+            return value.toString();
         } else if (value == null) {
             return "null";
         }
