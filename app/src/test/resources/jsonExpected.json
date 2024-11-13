@@ -1,7 +1,72 @@
-[{"value":["a","b","c"],"key":"chars1","status":"unchanged"},{"newValue":false,"oldValue":["d","e"
-,"f"],"key":"chars2","status":"updated"},{"newValue":true,"oldValue":false,"key":"checked","status":"updated"},{"newValue":["value1","value2"],"oldV
-  alue":null,"key":"default","status":"updated"},{"newValue":null,"oldValue":45,"key":"id","status":"updated"},{"oldValue":"value1","key":"key1","stat
-  us":"removed"},{"newValue":"value2","key":"key2","status":"added"},{"value":[1,2,3,4],"key":"numbers1","status":"unchanged"},{"newValue":[22,33,44,5
-  5],"oldValue":[2,3,4,5],"key":"numbers2","status":"updated"},{"oldValue":[3,4,5],"key":"numbers3","status":"removed"},{"newValue":[4,5,6],"key":"num
-  bers4","status":"added"},{"newValue":{"nestedKey":"value","isNested":true},"key":"obj1","status":"added"},{"newValue":"Anothervalue","oldValue":"Som
-  evalue","key":"setting1","status":"updated"},{"newValue":300,"oldValue":200,"key":"setting2","status":"updated"},{"newValue":"none","oldValue":true,"key":"setting3","status":"updated"}]
+[ {
+  "value" : [ "a", "b", "c" ],
+  "key" : "chars1",
+  "status" : "unchanged"
+}, {
+  "newValue" : false,
+  "oldValue" : [ "d", "e", "f" ],
+  "key" : "chars2",
+  "status" : "updated"
+}, {
+  "newValue" : true,
+  "oldValue" : false,
+  "key" : "checked",
+  "status" : "updated"
+}, {
+  "newValue" : [ "value1", "value2" ],
+  "oldValue" : null,
+  "key" : "default",
+  "status" : "updated"
+}, {
+  "newValue" : null,
+  "oldValue" : 45,
+  "key" : "id",
+  "status" : "updated"
+}, {
+  "oldValue" : "value1",
+  "key" : "key1",
+  "status" : "removed"
+}, {
+  "newValue" : "value2",
+  "key" : "key2",
+  "status" : "added"
+}, {
+  "value" : [ 1, 2, 3, 4 ],
+  "key" : "numbers1",
+  "status" : "unchanged"
+}, {
+  "newValue" : [ 22, 33, 44, 55 ],
+  "oldValue" : [ 2, 3, 4, 5 ],
+  "key" : "numbers2",
+  "status" : "updated"
+}, {
+  "oldValue" : [ 3, 4, 5 ],
+  "key" : "numbers3",
+  "status" : "removed"
+}, {
+  "newValue" : [ 4, 5, 6 ],
+  "key" : "numbers4",
+  "status" : "added"
+}, {
+  "newValue" : {
+    "nestedKey" : "value",
+    "isNested" : true
+  },
+  "key" : "obj1",
+  "status" : "added"
+}, {
+  "newValue" : "Another value",
+  "oldValue" : "Some value",
+  "key" : "setting1",
+  "status" : "updated"
+}, {
+  "newValue" : 300,
+  "oldValue" : 200,
+  "key" : "setting2",
+  "status" : "updated"
+}, {
+  "newValue" : "none",
+  "oldValue" : true,
+  "key" : "setting3",
+  "status" : "updated"
+} ]

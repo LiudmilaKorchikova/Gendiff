@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Stylish;
 import hexlet.code.formatters.Plain;
@@ -10,12 +9,16 @@ import java.util.Map;
 
 public class Formatter {
 
-    public static String format(List<Map<String, Object>> differences, String format) throws JsonProcessingException {
+    public static String format(List<Map<String, Object>> differences, String format) throws Exception {
         return switch (format) {
             case "plain" -> Plain.format(differences);
             case "stylish" -> Stylish.format(differences);
             case "json" -> Json.format(differences);
-            default -> Stylish.format(differences);
+            default -> throw new IllegalArgumentException("Unsupported format: " + format);
         };
+    }
+
+    public static String format(List<Map<String, Object>> differences) throws Exception {
+        return Stylish.format(differences);
     }
 }

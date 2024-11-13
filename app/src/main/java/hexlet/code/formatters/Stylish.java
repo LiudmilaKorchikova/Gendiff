@@ -18,50 +18,27 @@ public class Stylish {
             switch (status) {
                 case "unchanged":
                     result.append("    ").append(key).append(": ")
-                            .append(formatValue(change.get("value"))).append("\n");
+                            .append(change.get("value")).append("\n");
                     break;
                 case "updated":
                     result.append("  - ").append(key).append(": ")
-                            .append(formatValue(oldValue)).append("\n");
+                            .append(oldValue).append("\n");
                     result.append("  + ").append(key).append(": ")
-                            .append(formatValue(newValue)).append("\n");
+                            .append(newValue).append("\n");
                     break;
                 case "removed":
                     result.append("  - ").append(key).append(": ")
-                            .append(formatValue(oldValue)).append("\n");
+                            .append(oldValue).append("\n");
                     break;
                 case "added":
                     result.append("  + ").append(key).append(": ")
-                            .append(formatValue(newValue)).append("\n");
+                            .append(newValue).append("\n");
                     break;
                 default:
                     throw new IllegalArgumentException("Unknown status: " + status);
             }
         }
 
-        result.append("}");
-        return result.toString();
-    }
-
-    private static String formatValue(Object value) {
-        if (value instanceof Map) {
-            return formatMap((Map<String, Object>) value);
-        } else if (value instanceof String) {
-            return value.toString();
-        } else if (value == null) {
-            return "null";
-        }
-        return value.toString();
-    }
-
-    private static String formatMap(Map<String, Object> map) {
-        StringBuilder result = new StringBuilder("{");
-        for (Map.Entry<String, Object> entry : map.entrySet()) {
-            result.append(entry.getKey()).append("=").append(formatValue(entry.getValue())).append(", ");
-        }
-        if (map.size() > 0) {
-            result.setLength(result.length() - 2);
-        }
         result.append("}");
         return result.toString();
     }

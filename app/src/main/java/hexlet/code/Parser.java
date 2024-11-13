@@ -6,15 +6,22 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, Object> parse(String file) throws Exception {
-
+    public static Map<String, Object> parse(String[] file) throws Exception {
         ObjectMapper objectMapper;
-        if (file.startsWith("{") || file.startsWith("[")) {
-            objectMapper = new ObjectMapper();
-        } else {
-            objectMapper = new ObjectMapper(new YAMLFactory());
+        String fileContent = file[0];
+        String format = file[1];
+
+        switch (format) {
+            case ".json":
+                objectMapper = new ObjectMapper();
+                break;
+            case ".yaml":
+                objectMapper = new ObjectMapper(new YAMLFactory());
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported format");
         }
 
-        return objectMapper.readValue(file, Map.class);
+        return objectMapper.readValue(fileContent, Map.class);
     }
 }
