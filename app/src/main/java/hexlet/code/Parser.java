@@ -6,10 +6,8 @@ import java.util.Map;
 
 public class Parser {
 
-    public static Map<String, Object> parse(String[] file) throws Exception {
+    public static Map<String, Object> parse(String file, String format) throws Exception {
         ObjectMapper objectMapper;
-        String fileContent = file[0];
-        String format = file[1];
 
         switch (format) {
             case ".json":
@@ -22,6 +20,6 @@ public class Parser {
                 throw new IllegalArgumentException("Unsupported format");
         }
 
-        return objectMapper.readValue(fileContent, Map.class);
+        return objectMapper.readValue(file, Map.class);
     }
 }
