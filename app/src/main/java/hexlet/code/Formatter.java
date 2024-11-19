@@ -17,8 +17,4 @@ public class Formatter {
             default -> throw new IllegalArgumentException("Unsupported format: " + format);
         };
     }
-
-    public static String format(List<Map<String, Object>> differences) throws Exception {
-        return Stylish.format(differences);
-    }
 }

@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.BeforeAll;
 import hexlet.code.Differ;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.nio.file.Files;
@@ -38,26 +37,32 @@ public final class DifferTest {
     }
 
     @ParameterizedTest
-    @CsvSource({
-        "json, stylish, stylishExpected",
-        "json, plain, plainExpected",
-        "json, json, jsonExpected",
-        "yaml, stylish, stylishExpected",
-        "yaml, plain, plainExpected",
-        "yaml, json, jsonExpected"
-    })
-    void testGenerateWithSpecificFormat(String extension, String format, String expected) throws Exception {
+    @ValueSource(strings = {"json", "yaml"})
+    void testGenerateWithStylishFormat(String extension) throws Exception {
         String file1 = "src/test/resources/file1." + extension;
         String file2 = "src/test/resources/file2." + extension;
 
-        String actual = Differ.generate(file1, file2, format);
-        String expectedResult = switch (expected) {
-            case "stylishExpected" -> stylishExpected;
-            case "plainExpected" -> plainExpected;
-            case "jsonExpected" -> jsonExpected;
-            default -> throw new IllegalArgumentException("Unknown expected result: " + expected);
-        };
+        String actual = Differ.generate(file1, file2, "stylish");
+        assertEquals(stylishExpected, actual);
+    }
 
-        assertEquals(expectedResult, actual);
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yaml"})
+    void testGenerateWithPlainFormat(String extension) throws Exception {
+        String file1 = "src/test/resources/file1." + extension;
+        String file2 = "src/test/resources/file2." + extension;
+
+        String actual = Differ.generate(file1, file2, "plain");
+        assertEquals(plainExpected, actual);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yaml"})
+    void testGenerateWithJsonFormat(String extension) throws Exception {
+        String file1 = "src/test/resources/file1." + extension;
+        String file2 = "src/test/resources/file2." + extension;
+
+        String actual = Differ.generate(file1, file2, "json");
+        assertEquals(jsonExpected, actual);
     }
 }

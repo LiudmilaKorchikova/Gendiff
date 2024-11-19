@@ -16,16 +16,15 @@ public class Plain {
 
             switch (status) {
                 case "added":
-                    result.append("Property '").append(property).append("' was added with value: ")
-                            .append(formatValue(newValue)).append("\n");
+                    result.append(String.format("Property '%s' was added with value: %s%n",
+                            property, formatValue(newValue)));
                     break;
                 case "removed":
-                    result.append("Property '").append(property).append("' was removed").append("\n");
+                    result.append(String.format("Property '%s' was removed%n", property));
                     break;
                 case "updated":
-                    result.append("Property '").append(property).append("' was updated. From ")
-                            .append(formatValue(oldValue)).append(" to ")
-                            .append(formatValue(newValue)).append("\n");
+                    result.append(String.format("Property '%s' was updated. From %s to %s%n",
+                            property, formatValue(oldValue), formatValue(newValue)));
                     break;
                 default:
                     break;

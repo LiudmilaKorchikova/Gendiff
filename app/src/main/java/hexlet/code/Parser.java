@@ -10,10 +10,11 @@ public class Parser {
         ObjectMapper objectMapper;
 
         switch (format) {
-            case ".json":
+            case "json":
                 objectMapper = new ObjectMapper();
                 break;
-            case ".yaml":
+            case "yaml":
+            case "yml":
                 objectMapper = new ObjectMapper(new YAMLFactory());
                 break;
             default:

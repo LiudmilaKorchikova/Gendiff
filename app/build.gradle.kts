@@ -33,8 +33,10 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    maxHeapSize = "1024m"
 }
 
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("-parameters")
+    options.forkOptions.memoryMaximumSize = "1024m"
 }

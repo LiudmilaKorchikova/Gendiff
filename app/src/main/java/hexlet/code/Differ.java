@@ -15,17 +15,7 @@ public class Differ {
     private static String getFormat(String path) throws Exception {
         String[] parts = path.split("\\.");
 
-        String extension = parts[parts.length - 1];
-
-        switch (extension.toLowerCase()) {
-            case "json":
-                return ".json";
-            case "yaml":
-            case "yml":
-                return ".yaml";
-            default:
-                throw new Exception("Unsupported input format: " + extension);
-        }
+        return parts[parts.length - 1];
     }
 
     public static String generate(String filepath1, String filepath2, String outputFormat)
