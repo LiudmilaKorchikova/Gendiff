@@ -2,6 +2,7 @@ plugins {
     id("java")
     id("application")
     id("checkstyle")
+    id("jacoco")
 }
 
 application {
@@ -11,6 +12,10 @@ application {
 checkstyle {
     toolVersion = "10.12.4"
     configFile = file("config/checkstyle/checkstyle.xml")
+}
+
+jacoco {
+    toolVersion = "0.8.12"
 }
 
 group = "hexlet.code"
@@ -34,9 +39,18 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
     maxHeapSize = "1024m"
+    finalizedBy(tasks.jacocoTestReport)
 }
 
 tasks.withType<JavaCompile> {
     options.compilerArgs.add("-parameters")
     options.forkOptions.memoryMaximumSize = "1024m"
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(false)
+    }
 }
