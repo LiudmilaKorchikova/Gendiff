@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public final class DifferTest {
 
-    int a = 1;
     private static String stylishExpected;
     private static String plainExpected;
     private static String jsonExpected;
