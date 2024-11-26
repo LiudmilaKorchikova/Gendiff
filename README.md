@@ -1,7 +1,7 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/LiudmilaKorchikova/java-project-71/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/LiudmilaKorchikova/java-project-71/actions)
 ### Mainainability:
-[![Maintainability](https://api.codeclimate.com/v1/badges/f23af5e485836e40af70/maintainability)](https://codeclimate.com/github/LiudmilaKorchikova/java-project-71/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/384cc0809b02ef192893/maintainability)](https://codeclimate.com/github/LiudmilaKorchikova/java-project-71/maintainability)
 ### Test Coverage:
 [![Test Coverage](https://api.codeclimate.com/v1/badges/384cc0809b02ef192893/test_coverage)](https://codeclimate.com/github/LiudmilaKorchikova/java-project-71/test_coverage)
 ### asciinema:
